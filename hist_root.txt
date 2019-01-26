@@ -1,0 +1,23 @@
+    1  apt update
+    2  apt install wget tig git vim sudo 
+    3  cd /tmp
+    4  more db_commands.txt 
+    5  su postgres
+    6  apt install postgresql
+    7  more db_commands.txt 
+    8  su - postgres
+    9  service postgresql start
+   10  pg_isready 
+   11  su postgres -c 'psql -f /tmp/db_commands.txt'
+   12  service postgresql restart
+   13  pg_isready
+   14  cd /tmp
+   15  ls
+   16  dpkg -i irods-icat-4.1.12-ubuntu14-x86_64.deb 
+   17  apt install -f
+   18  history
+   19  dpkg -i irods-database-plugin-postgres-1.12-ubuntu14-x86_64.deb 
+   20  apt install -f
+   21  /var/lib/irods/packaging/setup_irods.sh
+   22  historyhistot
+   23  history >/tmp/hist_root.txt
