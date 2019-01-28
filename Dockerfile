@@ -14,10 +14,14 @@ RUN apt-get update && \
 # Setup ICAT database.
 RUN service postgresql start && su - postgres -c "psql -f /db_commands.txt" && \
     dpkg -i /irods-icat-4.1.12-ubuntu14-x86_64.deb /irods-database-plugin-postgres-1.12-ubuntu14-x86_64.deb ; \
-    apt install -y -f
+    apt install -y -f ; \
+    service postgresql stop
+
+ADD setup_irods_41.sh /run_irods.sh
+ADD wget_ir4_1_12_pkgs.sh /
 
 WORKDIR /
-#ADD run_irods.sh /run_irods.sh
-#RUN chmod u+x /run_irods.sh
-#ENTRYPOINT ["/bin/bash","-c"]
+
+RUN chmod u+x /run_irods.sh /wget_ir4_1_12_pkgs.sh
+
 CMD [ "/bin/bash" ]
