@@ -3,7 +3,7 @@ FROM ubuntu:14.04
 # Set the default shell for executing commands.
 SHELL ["/bin/bash", "-c"]
 
-ADD db_commands.txt setup_irods_41.sh \
+ADD db_commands.txt \
     irods-database-plugin-postgres-1.12-ubuntu14-x86_64.deb \
     irods-icat-4.1.12-ubuntu14-x86_64.deb \
     /
@@ -17,8 +17,8 @@ RUN service postgresql start && su - postgres -c "psql -f /db_commands.txt" && \
     apt install -y -f ; \
     service postgresql stop
 
-ADD setup_irods_41.sh /run_irods.sh
-ADD wget_ir4_1_12_pkgs.sh /
+ADD run_irods.sh /run_irods.sh 
+ADD wget_ir4_1_12_pkgs.sh /wget_ir4_1_12_pkgs.sh
 
 WORKDIR /
 
