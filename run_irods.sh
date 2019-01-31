@@ -1,5 +1,17 @@
 #!/bin/bash
 
+warning()
+{
+    cat <<'....EOF' >&2
+
+        In this docker container, it is good practice to clean up in case of
+        unexpected exit or when TERM signal  is sent by 'docker stop').
+        
+        To do this automatically:
+        trap 'service irods stop ;  service postgresql stop; echo "***"' EXIT TERM
+....EOF
+}
+
 file_missing=0
 
 for F in irods-icat-4.1.12-ubuntu14-x86_64.deb \
@@ -20,6 +32,25 @@ if [ $file_missing -gt 0 ]; then
     fi
 fi
 
-{ echo 'To setup manually from packages ... ';
-  echo 'Do - 1. service postgresql start';
-  echo '   - 2. /var/lib/irods/packaging/setup_irods.sh'; } >&2
+if ! id -u irods >/dev/null 2>&1
+then
+
+     # -- no irods user , instructions for install
+
+    { echo 'To configure iRODS ... '
+      echo 'Do - 1. service postgresql start'
+      echo '   - 2. /var/lib/irods/packaging/setup_irods.sh' ; } >&2
+
+else #-- irods user exists
+
+    if pgrep 'irods.*Server' >/dev/null 2>&1
+    then
+        echo >&2 'iRODS server already running!'
+    else
+        { echo 'To run iRODS ... '
+          echo 'Do - 1. service postgresql start'
+          echo "   - 2. su - irods -c ~irods'/iRODS/irodsctl start'" ; } >&2
+    fi
+
+    warning
+fi
