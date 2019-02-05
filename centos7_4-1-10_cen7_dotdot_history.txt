@@ -1,0 +1,25 @@
+    1  sudo visudo
+    2  cd /
+    3  ls
+    4  sudo rpm -ivh irods-icat-4.1.10-centos7-x86_64.rpm 
+    5  sudo su - postgres
+    6  cd
+    7  iinit
+    8  ils
+    9  imkdir a
+   10  icd a
+   11  imkdir ..
+   12  git
+   13  git clone http://github.com/irods/python-irodsclient
+   14  cd python-irodsclient/
+   15  cd
+   16  pip
+   17  rm -fr python-irodsclient/
+   18  ls .local
+   19  pip
+   20  pip3
+   21  python
+   22  sudo yum install python-pip
+   23  pip install --user python-irodsclient
+   24  ls
+   25  history >/tmp/centos7_4-1-10_cen7_dotdot_history.txt

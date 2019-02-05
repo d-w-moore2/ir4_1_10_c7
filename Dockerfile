@@ -1,27 +1,27 @@
-FROM ubuntu:14.04
+FROM centos:7
 
-# Set the default shell for executing commands.
 SHELL ["/bin/bash", "-c"]
 
 ADD db_commands.txt \
-    irods-database-plugin-postgres-1.12-ubuntu14-x86_64.deb \
-    irods-icat-4.1.12-ubuntu14-x86_64.deb \
+    irods-database-plugin-postgres-1.10-centos7-x86_64.rpm \
+    irods-icat-4.1.10-centos7-x86_64.rpm                   \
     /
 
-RUN apt-get update && \
-    apt-get install -y wget tig git vim sudo postgresql
+RUN yum install -y epel-release && \
+    yum install -y wget tig git vim sudo postgresql lsof \
+                   postgresql postgresql-server unixODBC perl authd postgresql-odbc \
+                   fuse-libs python-psutil python-requests python-jsonschema \
+                   perl-JSON python-jsonschema python-psutil python-pip
 
 # Setup ICAT database.
-RUN service postgresql start && su - postgres -c "psql -f /db_commands.txt" && \
-    dpkg -i /irods-icat-4.1.12-ubuntu14-x86_64.deb /irods-database-plugin-postgres-1.12-ubuntu14-x86_64.deb ; \
-    apt install -y -f ; \
-    service postgresql stop
+#RUN service postgresql start && su - postgres -c "psql -f /db_commands.txt" && \
+#    service postgresql stop
 
-ADD run_irods.sh /run_irods.sh 
-ADD wget_ir4_1_12_pkgs.sh /wget_ir4_1_12_pkgs.sh
+COPY run_irods_4_1.sh /
+COPY wget_ir4_1_12_pkgs.sh /
 
-WORKDIR /
+#WORKDIR /
 
-RUN chmod u+x /run_irods.sh /wget_ir4_1_12_pkgs.sh
+#RUN chmod u+x /run_irods_4_1.sh /wget_ir4_1_12_pkgs.sh
 
 CMD [ "/bin/bash" ]

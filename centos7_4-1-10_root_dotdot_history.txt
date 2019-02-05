@@ -1,0 +1,26 @@
+    1  ls /
+    2  yum install -y postgresql
+    3  yum install -y postgresql-server
+    4  yum install -y unixODBC
+    5  yum install -y perl authd
+    6  yum install -y postgresql-odbc
+    7  ls
+    8  su - postgres
+    9  su - cen7
+   10  ls
+   11  rpm -ivh irods-icat-4.1.10-centos7-x86_64.rpm 
+   12  rpm -ivh irods-icat-4.1.10-centos7-x86_64.rpm  lsof
+   13  yum install lsof
+   14  rpm -ivh irods-icat-4.1.10-centos7-x86_64.rpm 
+   15  yum install fuse-libs
+   16  yum install fuse-libs python-{psutil,requests,jsonschema}
+   17  rpm -ivh irods-icat-4.1.10-centos7-x86_64.rpm 
+   18  yum install  perl-JSON python-jsonschema python-psutil
+   19  rpm -ivh irods-icat-4.1.10-centos7-x86_64.rpm 
+   20  yum install  perl-JSON python-jsonschema python-psutil epel-release
+   21  yum install  perl-JSON python-jsonschema python-psutil
+   22  rpm -ivh irods-icat-4.1.10-centos7-x86_64.rpm 
+   23  rpm -ivh irods-database-plugin-postgres-1.10-centos7-x86_64.rpm 
+   24  /var/lib/irods/packaging/setup_irods.sh
+   25  su - cen7
+   26  history >/tmp/centos7_4-1-10_root_dotdot_history.txt

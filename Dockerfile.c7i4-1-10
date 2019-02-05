@@ -1,0 +1,14 @@
+FROM centos:7
+
+ARG preinstall=" sudo wget git which vim-enhanced "
+ENV PREINSTALL "${preinstall}"
+SHELL ["/bin/bash","-c"]
+RUN yum install -y $PREINSTALL
+COPY irods_setup.bash /
+COPY irods-database-plugin-postgres-1.10-centos7-x86_64.rpm /
+COPY irods-icat-4.1.10-centos7-x86_64.rpm /
+RUN  chmod +x /irods_setup.bash && /irods_setup.bash store
+RUN useradd -m -s/bin/bash cen7
+RUN usermod -aG wheel cen7
+RUN chpasswd <<<"cen7:mypw"
+

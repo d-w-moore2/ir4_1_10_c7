@@ -1,0 +1,11 @@
+FROM centos:7
+
+ARG preinstall=" sudo wget git which vim-enhanced "
+ENV PREINSTALL "${preinstall}"
+SHELL ["/bin/bash","-c"]
+RUN yum install -y $PREINSTALL
+COPY irods_setup.sh /
+RUN  chmod +x /thing.sh && /thing.sh store
+RUN useradd -m -s/bin/bash cen7
+RUN usermod -aG wheel cen7
+RUN chpasswd <<<"cen7:mypw"
